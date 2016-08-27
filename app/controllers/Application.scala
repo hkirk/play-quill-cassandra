@@ -1,25 +1,18 @@
 package controllers
 
-import play.api._
-import play.api.mvc._
-import play.api.libs.json.Json
-import com.datastax.driver.core.utils.UUIDs
-import play.api.libs.json.JsError
-
-import scala.concurrent.Future
 import java.util.UUID
 
 import com.google.inject.Inject
-import models.database.CassandraClient
 import models.database.repositories.SongsRepository
-import models.domain.Song
+import play.api.libs.json.{JsError, Json}
+import play.api.mvc._
 
-import scala.util.Try
+import scala.concurrent.Future
 
 class Application @Inject()(songsRepo: SongsRepository) extends Controller {
 
-  import play.api.libs.concurrent.Execution.Implicits.defaultContext
   import models.database.repositories.JsonFormats._
+  import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
   def index = Action.async {
     songsRepo.getAll.map(songs => Ok(Json.toJson(songs)))

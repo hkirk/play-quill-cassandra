@@ -4,7 +4,6 @@ import java.io.File
 
 import com.google.inject.Inject
 import models.database.CassandraClient
-import play.api.Logger
 
 /**
   * Initialize and migrate the dataStore configured in application.conf.
